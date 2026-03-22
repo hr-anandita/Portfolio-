@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Anandita Singh · HR & Front Desk Professional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Enhanced Splash Screen Styles */
+        #splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: linear-gradient(135deg, #1c1412 0%, #2a1e1a 50%, #1c1412 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+            overflow: hidden;
+        }
+        
+        /* Animated background particles */
+        .splash-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(201, 105, 74, 0.3);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .splash-inner {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: containerGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes containerGlow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(201, 105, 74, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(201, 105, 74, 0.6);
+            }
+        }
+        
+        .splash-bg-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(100px, 20vw, 250px);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            letter-spacing: -8px;
+            user-select: none;
+            animation: bgTextPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes bgTextPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+        
+        .splash-label {
+            font-size: 0.85rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--blush);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUpSlide 0.8s 0.3s forwards, labelGlow 2s 1s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes labelGlow {
+            0%, 100% {
+                text-shadow: 0 0 5px rgba(242, 196, 160, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(242, 196, 160, 0.8);
+            }
+        }
+        
+        .splash-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeUpSlide 0.8s 0.6s forwards;
+            position: relative;
+        }
+        
+        .splash-name em {
+            font-style: italic;
+            color: var(--rose);
+            position: relative;
+            display: inline-block;
+            animation: nameEmphasis 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes nameEmphasis {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--rose);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--rose);
+            }
+        }
+        
+        .splash-role {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 1rem;
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: fadeUpSlide 0.8s 0.9s forwards;
+            font-weight: 400;
+        }
+        
+        .splash-bar {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blush), var(--terracotta));
+            margin: 2rem auto 0;
+            opacity: 0;
+            animation: fadeUpSlide 0.5s 1.1s forwards, expandBar 1.2s 1.2s forwards;
+            border-radius: 2px;
+        }
+        
+        @keyframes expandBar {
+            to {
+                width: 320px;
+                background: linear-gradient(90deg, var(--terracotta), var(--rose));
+            }
+        }
+        
+        @keyframes fadeUpSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Decorative circles */
+        .splash-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 105, 74, 0.2) 0%, transparent 70%);
+            animation: circlePulse 3s ease-in-out infinite;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -250px;
+            right: -250px;
+            animation-delay: 1s;
+        }
+        
+        .circle-3 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes circlePulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Loading indicator */
+        .splash-loader {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUpSlide 0.5s 1.4s forwards;
+        }
+        
+        .loader-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            animation: loaderBounce 1.4s ease-in-out infinite;
+        }
+        
+        .loader-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .loader-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .loader-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes loaderBounce {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Footer Social Icons Styles */
+        .footer-social {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        .footer-social-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-social-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--terracotta), var(--rose));
+            top: 0;
+            left: -100%;
+            transition: left 0.3s ease;
+            z-index: 0;
+        }
+        
+        .footer-social-icon:hover::before {
+            left: 0;
+        }
+        
+        .footer-social-icon i {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social-icon:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        .footer-social-icon:hover i {
+            transform: scale(1.1);
+        }
+        
+        .footer-social-icon.instagram:hover {
+            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
+        }
+        
+        .footer-social-icon.facebook:hover {
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+        }
+        
+        .footer-social-icon.youtube:hover {
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .footer-social-icon.github:hover {
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .footer-social-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .footer-social-icon:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .footer-social-icon:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .footer-social-icon:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .footer-social-icon:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        
+        .footer-social-icon:hover {
+            animation: none;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-social {
+                justify-content: center;
+                margin-top: 1rem;
+            }
+            
+            .footer-social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .splash-label {
+                letter-spacing: 5px;
+                font-size: 0.7rem;
+            }
+            
+            .splash-role {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="follower"></div>
+
+    <!-- Enhanced Splash Screen -->
+    <div id="splash">
+        <!-- Animated Particles -->
+        <div class="splash-particles" id="particles"></div>
+        
+        <!-- Decorative Circles -->
+        <div class="splash-circle circle-1"></div>
+        <div class="splash-circle circle-2"></div>
+        <div class="splash-circle circle-3"></div>
+        
+        <div class="splash-inner">
+            <div class="splash-bg-text">HR</div>
+            <div class="splash-label">✨ HR & Front Desk Specialist ✨</div>
+            <h1 class="splash-name">Anandita <em>Singh</em></h1>
+            <p class="splash-role">HR Coordinator · Front Desk Professional</p>
+            <div class="splash-bar"></div>
+        </div>
+        
+        <!-- Loading Indicator -->
+        <div class="splash-loader">
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-logo">
+            <div class="logo-mark">AS</div>
+            <div class="logo-info">
+                <h1>Anandita Singh</h1>
+                <span>HR · Front Desk Specialist</span>
+            </div>
+        </div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="pages/experience.html">Experience</a>
+            <a href="pages/skills.html">Skills</a>
+            <a href="pages/about.html">About</a>
+            <a href="pages/contact.html" class="nav-cta">Let's Connect <i class="fas fa-arrow-right"></i></a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-left">
+                <div class="hero-eyebrow">Tagore Garden · New Delhi</div>
+                <h1 class="hero-title">
+                    HR & Front Desk<br><em>with warmth,</em><br>precision & care.
+                </h1>
+                <p class="hero-desc">
+                    Detail-oriented HR Coordinator and Front Desk Specialist with proven experience in recruitment, guest relations, and operational excellence. Blending hospitality with HR finesse.
+                </p>
+                <div class="hero-actions">
+                    <a href="pages/experience.html" class="btn-primary">
+                        View Experience <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="pages/skills.html" class="btn-ghost">
+                        Core Skills <i class="fas fa-sparkles"></i>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-num">2+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">HR +</div>
+                        <div class="stat-label">Hospitality</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">BHU</div>
+                        <div class="stat-label">Hindi Hons.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-pattern"></div>
+                <div class="floating-badge fb-1">
+                    <i class="fas fa-phone-alt"></i> <anaditasingh class="hr"></anaditasingh>
+                </div>
+                <div class="floating-badge fb-2">
+                    <i class="fas fa-envelope"></i> aanyath05@gmail.com
+                </div>
+                <div class="floating-badge fb-3">
+                    <i class="fas fa-map-marker-alt"></i> New Delhi, India
+                </div>
+                <div class="hero-card-stack">
+                    <div class="hero-card">
+                        <div class="hero-card-tag">
+                            <i class="fas fa-user-check"></i> Open to opportunities
+                        </div>
+                        <h3>Anandita Singh</h3>
+                        <p>HR Coordinator & Front Desk Specialist bringing operational excellence and people-first approach to every interaction.</p>
+                        <div class="hero-card-chips">
+                            <span class="chip">Recruitment</span>
+                            <span class="chip">Guest Relations</span>
+                            <span class="chip">Documentation</span>
+                            <span class="chip">Onboarding</span>
+                            <span class="chip">Conflict Resolution</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee-wrap">
+            <div class="marquee-track">
+                <span class="marquee-item"><span class="marquee-dot"></span> HR Coordination</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Front Desk Excellence</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Recruitment</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Guest Relations</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Employee Onboarding</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Documentation</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Conflict Resolution</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Social Media Management</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> HR Coordination</span>
+                <span class="marquee-item"><span class="marquee-dot"></span> Front Desk Excellence</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="quick-nav">
+                <a href="pages/experience.html" class="qnav-card">
+                    <div class="qnav-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Experience</h3>
+                    <p>View my work history</p>
+                </a>
+                <a href="pages/skills.html" class="qnav-card">
+                    <div class="qnav-icon"><i class="fas fa-chart-network"></i></div>
+                    <h3>Skills Hub</h3>
+                    <p>Technical & soft skills</p>
+                </a>
+                <a href="pages/about.html" class="qnav-card">
+                    <div class="qnav-icon"><i class="fas fa-user-circle"></i></div>
+                    <h3>About Me</h3>
+                    <p>Get to know Anandita</p>
+                </a>
+                <a href="pages/contact.html" class="qnav-card">
+                    <div class="qnav-icon"><i class="fas fa-paper-plane"></i></div>
+                    <h3>Contact</h3>
+                    <p>Let's connect</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Anandita Singh</h3>
+                <p>HR Coordinator | Front Desk Specialist</p>
+                <div class="footer-social">
+                    <a href="https://github.com/hr-anandita" target="_blank" class="footer-social-icon github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.instagram.com/aanya_rajvansh" target="_blank" class="footer-social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com/anandita.hr" target="_blank" class="footer-social-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@aanya_rajvansh" target="_blank" class="footer-social-icon youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://in.linkedin.com/in/aanya-rajvansh-73594425a" target="_blank" class="footer-social-icon linkedin">
+                        <i class="fab fa-linkedin-in"></i>  
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="pages/experience.html">Experience</a>
+                <a href="pages/skills.html">Skills</a>
+                <a href="pages/about.html">About</a>
+                <a href="pages/contact.html">Contact</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2025 Anandita Singh · HR & Front Desk Portfolio · All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Create animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 6 + 2;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 10 + 5;
+                const delay = Math.random() * 5;
+                
+                particle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${left}%;
+                    animation-duration: ${duration}s;
+                    animation-delay: ${delay}s;
+                    background: rgba(201, 105, 74, ${Math.random() * 0.4 + 0.1});
+                `;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Call when page loads
+        document.addEventListener('DOMContentLoaded', createParticles);
+        
+        // Update splash timeout to match enhanced animation
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 2800);
+    </script>
+</body>
+</html>
